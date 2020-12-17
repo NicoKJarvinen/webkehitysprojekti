@@ -54,3 +54,18 @@
   letter-spacing: 1px;
   line-height: 1.2rem;
 }
+
+@media screen and (max-width: 820px) {
+  .aboutContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .aboutText {
+    position: unset;
+  }
+
+  .aboutRight {
+    margin: 0 30px;
+  }
+}
