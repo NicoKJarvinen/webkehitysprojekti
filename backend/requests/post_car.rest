@@ -1,0 +1,21 @@
+POST http://localhost:3003/api/cars
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpIiwiaWQiOiI1ZmNmOTQ0Y2RkN2U1YjI5OTRhNTg2M2UiLCJpYXQiOjE2MDc1MzM1NzV9.9cAp-2YSsqR-0EP3slxRWnzoTxhGzQGFCJ0-kdtaxwk
+
+{
+    "img": "", 
+    "location": "Espoo 02600", 
+    "price": "26",
+    "basicInfo": "Very nice car in espoo come and get me pls im very cheap also", 
+    "carBrand": "Toyota Hiace",
+    "technicalDetails": {
+        "vechileType": "Van",
+        "color": "Grey",
+        "fuelTypes": "Diesel",
+        "tyreType": "Summer tyres",
+        "trailerHitch": "true",
+        "seatingCapacity": "5",
+        "transmission": "Manual",
+        "mileage": "260000"
+    }
+}

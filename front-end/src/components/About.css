@@ -1,0 +1,56 @@
+.aboutContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.aboutLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.aboutLeft > h1 {
+  margin-top: 1rem;
+  align-self: center;
+  border-top: 4px solid black;
+  width: 60%;
+  letter-spacing: 4px;
+  line-height: 4rem;
+  text-transform: uppercase;
+}
+
+.aboutLeft > img {
+  width: 60%;
+  height: 500px;
+  box-shadow: 5px 10px #888888;
+}
+
+.aboutRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-align: left;
+}
+
+.aboutText {
+  position: absolute;
+  margin-top: 10%;
+  top: 0;
+  letter-spacing: 1px;
+  line-height: 1.2rem;
+  font-style: oblique;
+}
+
+.aboutRight > h2 {
+  line-height: 4rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.customerText {
+  letter-spacing: 1px;
+  line-height: 1.2rem;
+}

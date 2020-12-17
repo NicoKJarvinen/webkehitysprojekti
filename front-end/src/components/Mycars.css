@@ -1,0 +1,76 @@
+.carHeader > h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.carsContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.carsBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.carBoxContent img {
+  width: 450px;
+  height: 300px;
+}
+
+.carBoxContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.carsUpdate {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+}
+
+.carsUpdate label {
+  font-size: 1.5rem;
+}
+
+.carsUpdate input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-color: rgba(230, 230, 230, 0.6);
+  font-size: 1.1rem;
+  margin-top: 12%;
+  margin-bottom: 22px;
+  transition: 0.3s;
+}
+.carsUpdate input:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.carsUpdate input:focus {
+  background-color: #fff;
+  border: 2px solid rgba(30, 85, 250, 0.47);
+}
+
+.updateButton {
+  width: 60%;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  background-color: #2ecc71;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
