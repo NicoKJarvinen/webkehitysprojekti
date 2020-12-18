@@ -2,6 +2,12 @@ import React from "react";
 
 import { Button } from "./Buttons";
 
+/**
+ * Kotisivulla olevan video osion komponentti.
+ *
+ * @component
+ */
+
 function HeroSection() {
   return (
     <div className="hero-container">

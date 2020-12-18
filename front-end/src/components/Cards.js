@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import carService from "../services/cars";
-import { useSelector } from "react-redux";
 import CardItem from "./CardItem";
 import "./Cards.css";
+
+/**
+ * Kotisivulla olevan korttiosion komponentti
+ *
+ * @component
+ */
 
 function Cards() {
   const [cars, setCars] = useState([]);

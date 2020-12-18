@@ -128,9 +128,6 @@
   font-size: 1.1em;
 }
 
-.imageInput input button {
-}
-
 @media screen and (max-width: 880px) {
   .content-box {
     grid-template-columns: 1fr;

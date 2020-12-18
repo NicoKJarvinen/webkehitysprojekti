@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import loginService from "../services/login";
 import carService from "../services/cars";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userLogin } from "../reducers/user";
 
 function Login() {

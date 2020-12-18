@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Component for About page
+ *
+ * @component
+ */
+
 function About() {
   return (
     <div className="aboutContainer">

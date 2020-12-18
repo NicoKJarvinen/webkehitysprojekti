@@ -3,6 +3,12 @@ import "./Footer.css";
 import { Button } from "./Buttons";
 import { Link } from "react-router-dom";
 
+/**
+ * Sivujen pohjalla olevan footerin komponentti
+ *
+ * @component
+ */
+
 function Footer() {
   return (
     <div className="footer-container">

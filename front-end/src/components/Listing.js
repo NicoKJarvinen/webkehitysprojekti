@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import carService from "../services/cars";
 import FileBase64 from "react-file-base64";
 
@@ -16,7 +16,6 @@ function Listing() {
   const [transmission, setTransmission] = useState("");
   const [mileage, setMileage] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [cars, setCars] = useState([]);
   const [error, setError] = useState("");
 
   // tämä asynciksi...

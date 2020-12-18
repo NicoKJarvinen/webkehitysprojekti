@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/pages/Home";
@@ -9,7 +10,7 @@ import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import Mycars from "./components/pages/MycarsP";
 import Listing from "./components/pages/Listing";
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userLogin } from "./reducers/user";
 import carService from "./services/cars";
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/mycars" component={Mycars} />
         </Switch>
+        <Footer />
       </Router>
     </>
   );

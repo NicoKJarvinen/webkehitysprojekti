@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Button } from "./Buttons";
 import "./Navbar.css";
 import Menu from "./Menu";
