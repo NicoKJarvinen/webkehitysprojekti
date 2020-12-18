@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> front-end/src/components/Footer.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Webproject 2020</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="About.html">About</a></li><li><a href="Cards.html">Cards</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HeroSection.html">HeroSection</a></li><li><a href="Listing.html">Listing</a></li><li><a href="Login.html">Login</a></li><li><a href="MobileMenu.html">MobileMenu</a></li><li><a href="MyCars.html">MyCars</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Renting.html">Renting</a></li><li><a href="Renting-modalOpen.html">modalOpen</a></li><li><a href="Signup.html">Signup</a></li></ul></div><div class="category"><h2>Controllers</h2><h3>Modules</h3><ul><li><a href="module-carsRouter.html">carsRouter</a></li><li><a href="module-loginRouter.html">loginRouter</a></li><li><a href="module-userRouter.html">userRouter</a></li></ul></div><div class="category"><h2>Models</h2><h3>Modules</h3><ul><li><a href="module-carmodel.html">carmodel</a></li><li><a href="module-usermodel.html">usermodel</a></li></ul></div><div class="category"><h2>Services</h2><h3>Modules</h3><ul><li><a href="module-carService.html">carService</a></li><li><a href="module-loginService.html">loginService</a></li><li><a href="module-registerService.html">registerService</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Modules</h3><ul><li><a href="module-config.html">config</a></li><li><a href="module-logger.html">logger</a></li></ul></div><div class="category"><h2>reducers</h2><h3>Modules</h3><ul><li><a href="module-userReducer.html">userReducer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>front-end/src/components/Footer.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./Footer.css";
+import { Button } from "./Buttons";
+import { Link } from "react-router-dom";
+
+/**
+ * Sivujen pohjalla olevan footerin komponentti
+ *
+ * @component
+ */
+
+function Footer() {
+  return (
+    &lt;div className="footer-container">
+      &lt;section className="footer-subscription">
+        &lt;p className="footer-subscription-heading">
+          Join the newsletter to receive our best car deals
+        &lt;/p>
+        &lt;p className="footer-subscription-text">
+          You can unsubscribe at any time.
+        &lt;/p>
+        &lt;div className="input-areas">
+          &lt;form>
+            &lt;input
+              className="footer-input"
+              name="email"
+              type="email"
+              placeholder="Your Email"
+            />
+            &lt;Button buttonStyle="btn--outline">Subscribe&lt;/Button>
+          &lt;/form>
+        &lt;/div>
+      &lt;/section>
+      &lt;div className="footer-links">
+        &lt;div className="footer-link-wrapper">
+          &lt;div className="footer-link-items">
+            &lt;h2>About Us&lt;/h2>
+            &lt;Link to="/sign-up">How it works&lt;/Link>
+            &lt;Link to="/">Testimonials&lt;/Link>
+            &lt;Link to="/">Careers&lt;/Link>
+            &lt;Link to="/">Investors&lt;/Link>
+            &lt;Link to="/">Terms of Service&lt;/Link>
+          &lt;/div>
+          &lt;div className="footer-link-items">
+            &lt;h2>Contact Us&lt;/h2>
+            &lt;Link to="/">Contact&lt;/Link>
+            &lt;Link to="/">Support&lt;/Link>
+            &lt;Link to="/">Cars&lt;/Link>
+            &lt;Link to="/">Sponsorships&lt;/Link>
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="footer-link-wrapper">
+          &lt;div className="footer-link-items">
+            &lt;h2>Videos&lt;/h2>
+            &lt;Link to="/">Submit Video&lt;/Link>
+            &lt;Link to="/">Ambassadors&lt;/Link>
+            &lt;Link to="/">Agency&lt;/Link>
+            &lt;Link to="/">Influencers&lt;/Link>
+          &lt;/div>
+          &lt;div className="footer-link-items">
+            &lt;h2>Social Media&lt;/h2>
+            &lt;Link to="/">Instagram&lt;/Link>
+            &lt;Link to="/">Facebook&lt;/Link>
+            &lt;Link to="/">Youtube&lt;/Link>
+            &lt;Link to="/">Twitter&lt;/Link>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      &lt;section className="social-media">
+        &lt;div className="social-media-wrap">
+          &lt;div className="footer-logo">
+            &lt;Link to="/" className="social-logo">
+              RECAR
+              &lt;i className="fas fa-car" />
+            &lt;/Link>
+          &lt;/div>
+          &lt;small className="website-rights">RECAR © 2020&lt;/small>
+          &lt;div className="social-icons">
+            &lt;Link
+              className="social-icon-link facebook"
+              to="/"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              &lt;i className="fab fa-facebook-f" />
+            &lt;/Link>
+            &lt;Link
+              className="social-icon-link instagram"
+              to="/"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              &lt;i className="fab fa-instagram" />
+            &lt;/Link>
+            &lt;Link
+              className="social-icon-link youtube"
+              to="/"
+              target="_blank"
+              aria-label="Youtube"
+            >
+              &lt;i className="fab fa-youtube" />
+            &lt;/Link>
+            &lt;Link
+              className="social-icon-link twitter"
+              to="/"
+              target="_blank"
+              aria-label="Twitter"
+            >
+              &lt;i className="fab fa-twitter" />
+            &lt;/Link>
+            &lt;Link
+              className="social-icon-link twitter"
+              to="/"
+              target="_blank"
+              aria-label="LinkedIn"
+            >
+              &lt;i className="fab fa-linkedin" />
+            &lt;/Link>
+          &lt;/div>
+        &lt;/div>
+      &lt;/section>
+    &lt;/div>
+  );
+}
+
+export default Footer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

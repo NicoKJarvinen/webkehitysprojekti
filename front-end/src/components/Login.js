@@ -4,15 +4,21 @@ import loginService from "../services/login";
 import carService from "../services/cars";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../reducers/user";
-
+/**
+ * Komponentti kirjautumissivulle.
+ * @component
+ */
 function Login() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  //const [kayttaja, setKayttaja] = useState(null);
 
+  /**
+   * Tapahtumankäsittelijä kirjautumistietojen lähettämisestä palvelimelle.
+   * @param {object} event tapahtuma. 
+   */
   const handleLogin = async (event) => {
     event.preventDefault();
 

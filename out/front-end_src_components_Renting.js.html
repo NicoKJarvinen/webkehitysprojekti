@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> front-end/src/components/Renting.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Webproject 2020</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="About.html">About</a></li><li><a href="Cards.html">Cards</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HeroSection.html">HeroSection</a></li><li><a href="Listing.html">Listing</a></li><li><a href="Login.html">Login</a></li><li><a href="MobileMenu.html">MobileMenu</a></li><li><a href="MyCars.html">MyCars</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Renting.html">Renting</a></li><li><a href="Renting-modalOpen.html">modalOpen</a></li><li><a href="Signup.html">Signup</a></li></ul></div><div class="category"><h2>Controllers</h2><h3>Modules</h3><ul><li><a href="module-carsRouter.html">carsRouter</a></li><li><a href="module-loginRouter.html">loginRouter</a></li><li><a href="module-userRouter.html">userRouter</a></li></ul></div><div class="category"><h2>Models</h2><h3>Modules</h3><ul><li><a href="module-carmodel.html">carmodel</a></li><li><a href="module-usermodel.html">usermodel</a></li></ul></div><div class="category"><h2>Services</h2><h3>Modules</h3><ul><li><a href="module-carService.html">carService</a></li><li><a href="module-loginService.html">loginService</a></li><li><a href="module-registerService.html">registerService</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Modules</h3><ul><li><a href="module-config.html">config</a></li><li><a href="module-logger.html">logger</a></li></ul></div><div class="category"><h2>reducers</h2><h3>Modules</h3><ul><li><a href="module-userReducer.html">userReducer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>front-end/src/components/Renting.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, Fragment } from "react";
+import Modal from "react-modal";
+import carService from "../services/cars";
+import { useSelector } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
+import CardItem from "./CardItem";
+import "./Renting.css";
+/**
+ * Komponentti vuokraussivustolle.
+ * @component
+ */
+function Renting() {
+  const [cars, setCars] = useState([]);
+  const [clickedCar, setClickedCar] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const userstate = useSelector((state) => state.user);
+  let logged = userstate.logged;
+
+  useEffect(() => {
+    carService.getAll().then((cars) => setCars(cars));
+  }, []);
+
+  /**
+   * Käsittelee tapahtuman kun ilmoitusta klikataan, näyttää ilmoituksen kaikki tiedot.
+   * @param {string} id klikatun ilmoituksen id. 
+   */
+  const showDetails = async (id) => {
+    try {
+      const car = await carService.getOne(id);
+      setClickedCar(car);
+      setModalIsOpen(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const authLinks = (
+    &lt;Fragment>
+      &lt;Link to="/Mycars">
+        &lt;button className="carsButton">View your listings&lt;/button>
+      &lt;/Link>
+    &lt;/Fragment>
+  );
+
+  if (cars.length === 0) {
+    return null;
+  }
+  /**
+   * Komponentti jossa auton kaikki tiedot.
+   * @component
+   */
+  function modalOpen() {
+    if (clickedCar != null) {
+      return (
+        &lt;>
+          &lt;Modal
+            isOpen={modalIsOpen}
+            ariaHideApp={false}
+            onRequestClose={() => setModalIsOpen(false)}
+          >
+            &lt;p className="closeModal" onClick={() => setModalIsOpen(false)}>
+              &lt;i className="fas fa-times" />
+            &lt;/p>
+            &lt;div class="leftSide">
+              &lt;h3>{clickedCar.carBrand}&lt;/h3>
+              &lt;img src={clickedCar.img} alt="" />
+              &lt;p>Listed by: {clickedCar.user[0].username}&lt;/p>
+            &lt;/div>
+            &lt;div class="rightSide">
+              &lt;ul>
+                &lt;li>Price: {clickedCar.price}€/day&lt;/li>
+                &lt;li>Location: {clickedCar.location}&lt;/li>
+                &lt;li>Basic info: {clickedCar.basicInfo}&lt;/li>
+                &lt;li>Color: {clickedCar.technicalDetails.color}&lt;/li>
+                &lt;li>Fuel type: {clickedCar.technicalDetails.fuelTypes}&lt;/li>
+                &lt;li>Tyre type: {clickedCar.technicalDetails.tyreType}&lt;/li>
+                &lt;li>
+                  Trailer hitch:
+                  {clickedCar.technicalDetails.trailerHitch ? " Yes" : " No"}
+                &lt;/li>
+                &lt;li>
+                  Seating capacity:
+                  {clickedCar.technicalDetails.seatingCapacity}
+                &lt;/li>
+                &lt;li>
+                  Transmission: {clickedCar.technicalDetails.transmission}
+                &lt;/li>
+                &lt;li>Mileage: {clickedCar.technicalDetails.mileage}&lt;/li>
+              &lt;/ul>
+            &lt;/div>
+          &lt;/Modal>
+        &lt;/>
+      );
+    }
+  }
+  return (
+    &lt;>
+      &lt;div className="cars__heading">
+        &lt;h2>Cars available&lt;/h2>
+        {logged ? authLinks : null}
+      &lt;/div>
+      &lt;div className="cars__container">
+        &lt;div className="cars__wrapper">
+          &lt;ul className="car__items">
+            {cars.map((car) => (
+              &lt;CardItem
+                src={car.img}
+                onClick={(e) => showDetails(car.id)}
+                text={car.basicInfo}
+                label={car.price + " €/day"}
+              />
+            ))}
+            {modalOpen()}
+          &lt;/ul>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+}
+
+export default Renting;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

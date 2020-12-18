@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> front-end/src/components/Mycars.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Webproject 2020</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="About.html">About</a></li><li><a href="Cards.html">Cards</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HeroSection.html">HeroSection</a></li><li><a href="Listing.html">Listing</a></li><li><a href="Login.html">Login</a></li><li><a href="MobileMenu.html">MobileMenu</a></li><li><a href="MyCars.html">MyCars</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Renting.html">Renting</a></li><li><a href="Renting-modalOpen.html">modalOpen</a></li><li><a href="Signup.html">Signup</a></li></ul></div><div class="category"><h2>Controllers</h2><h3>Modules</h3><ul><li><a href="module-carsRouter.html">carsRouter</a></li><li><a href="module-loginRouter.html">loginRouter</a></li><li><a href="module-userRouter.html">userRouter</a></li></ul></div><div class="category"><h2>Models</h2><h3>Modules</h3><ul><li><a href="module-carmodel.html">carmodel</a></li><li><a href="module-usermodel.html">usermodel</a></li></ul></div><div class="category"><h2>Services</h2><h3>Modules</h3><ul><li><a href="module-carService.html">carService</a></li><li><a href="module-loginService.html">loginService</a></li><li><a href="module-registerService.html">registerService</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Modules</h3><ul><li><a href="module-config.html">config</a></li><li><a href="module-logger.html">logger</a></li></ul></div><div class="category"><h2>reducers</h2><h3>Modules</h3><ul><li><a href="module-userReducer.html">userReducer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>front-end/src/components/Mycars.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import CarService from "../services/cars";
+
+/**
+ * Käyttäjän tunnusten taakse piilotettu sivu, josta löytyy
+ * käyttäjän sivulle tekemät ilmoitukset.
+ *
+ * @component
+ */
+function MyCars() {
+  const username = useSelector((state) => state.user.username);
+  const [cars, setCars] = useState([]);
+  const [price, setPrice] = useState({});
+
+  useEffect(() => {
+    CarService.getAll()
+      .then((cars) => cars.filter((car) => car.user[0].username === username))
+      .then((c) => setCars(c));
+  }, [username]);
+  /**
+   * Käsittelee painikkeen painalluksen ja lähettää päivitetyn hinnan api:in.
+   * @param {string} id auton id jonka hinta päivitetään.
+   */
+  const handleSubmit = async (id) => {
+    const target = id;
+    const targetprice = price[target];
+    const priceobject = {
+      price: targetprice,
+    };
+    try {
+      const result = await CarService.update(id, priceobject);
+      const carList = cars.map((car) =>
+        car.id === result.id
+          ? {
+              ...car,
+              price: result.price,
+            }
+          : car
+      );
+      setCars(carList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  /**
+   * Käsittelee input kentän muutokset ja asettaa muuttujan tilan kun muutos tapahtuu.
+   * @param {event} event muutos.
+   */
+  const handlePriceChange = async (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    setPrice({
+      ...price,
+      [name]: value,
+    });
+  };
+  console.log(price);
+  /**
+   * Käsittelee delete painikkeen tapahtuman ja post requestaa backendiin pyynnön poistamiseen.
+   * @param {string} id poistettavan auton id.
+   */
+  const handleDelete = async (id) => {
+    try {
+      const car = await CarService.deleteCar(id);
+      const carList = cars.filter((car) => car.id !== id);
+      setCars(carList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  if (cars.length === 0) {
+    return &lt;p>No cars listed!&lt;/p>;
+  }
+
+  return (
+    &lt;>
+      &lt;div class="carHeader">
+        &lt;h1>Your listings&lt;/h1>
+      &lt;/div>
+      &lt;div className="carsContent">
+        &lt;div className="carsBox">
+          {cars.map((car) => (
+            &lt;div className="carBoxContent" key={car.id}>
+              &lt;img src={car.img} alt="car" />
+              &lt;form>
+                &lt;div className="carsUpdate">
+                  &lt;label>Update price: &lt;/label>
+                  &lt;input
+                    type="text"
+                    name={car.id}
+                    placeholder={car.price}
+                    onChange={handlePriceChange}
+                  />
+                  &lt;button
+                    className="updateButton"
+                    onClick={() => handleSubmit(car.id)}
+                  >
+                    Submit
+                  &lt;/button>
+                  &lt;button
+                    className="updateButton"
+                    onClick={() => handleDelete(car.id)}
+                  >
+                    Delete listing
+                  &lt;/button>
+                &lt;/div>
+              &lt;/form>
+            &lt;/div>
+          ))}
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+}
+
+export default MyCars;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

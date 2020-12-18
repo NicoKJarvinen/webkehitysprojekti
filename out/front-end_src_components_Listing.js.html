@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> front-end/src/components/Listing.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Webproject 2020</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="About.html">About</a></li><li><a href="Cards.html">Cards</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HeroSection.html">HeroSection</a></li><li><a href="Listing.html">Listing</a></li><li><a href="Login.html">Login</a></li><li><a href="MobileMenu.html">MobileMenu</a></li><li><a href="MyCars.html">MyCars</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Renting.html">Renting</a></li><li><a href="Renting-modalOpen.html">modalOpen</a></li><li><a href="Signup.html">Signup</a></li></ul></div><div class="category"><h2>Controllers</h2><h3>Modules</h3><ul><li><a href="module-carsRouter.html">carsRouter</a></li><li><a href="module-loginRouter.html">loginRouter</a></li><li><a href="module-userRouter.html">userRouter</a></li></ul></div><div class="category"><h2>Models</h2><h3>Modules</h3><ul><li><a href="module-carmodel.html">carmodel</a></li><li><a href="module-usermodel.html">usermodel</a></li></ul></div><div class="category"><h2>Services</h2><h3>Modules</h3><ul><li><a href="module-carService.html">carService</a></li><li><a href="module-loginService.html">loginService</a></li><li><a href="module-registerService.html">registerService</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Modules</h3><ul><li><a href="module-config.html">config</a></li><li><a href="module-logger.html">logger</a></li></ul></div><div class="category"><h2>reducers</h2><h3>Modules</h3><ul><li><a href="module-userReducer.html">userReducer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>front-end/src/components/Listing.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import carService from "../services/cars";
+import FileBase64 from "react-file-base64";
+/**
+ * Komponentti autojen listaussivulle.
+ * @component
+ */
+function Listing() {
+  const [location, setLocation] = useState("");
+  const [price, setPrice] = useState("");
+  const [basicinfo, setBasicInfo] = useState("");
+  const [carBrand, setCarBrand] = useState("");
+  const [vechileType, setVechileType] = useState("");
+  const [color, setColor] = useState("");
+  const [fuelTypes, setFuelTypes] = useState("");
+  const [tyreType, setTyreType] = useState("");
+  const [trailerHitch, setTrailerHitch] = useState(false);
+  const [seatingCapacity, setSeatingCapacity] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [mileage, setMileage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [error, setError] = useState("");
+
+  /**
+   * Tapahtumankäsittelijä lomakkeen lähettämiselle palvelimelle.
+   * @param {object} event tapahtuma 
+   */
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!imageFile) {
+      console.log("kaatu");
+      setError("Image file is needed");
+      return;
+    }
+
+    if (imageFile) {
+      const x = imageFile.base64.length;
+      const last = imageFile.base64.charAt(x - 1);
+      const secondlast = imageFile.base64.charAt(x - 2);
+      let y = 0;
+      if (last === "=" &amp;&amp; secondlast === "=") {
+        y = 2;
+      } else if (last === 3) {
+        y = 1;
+      }
+      const sizeinbytes = x * (3 / 4) - y;
+
+      if (sizeinbytes > 300000) {
+        console.log("imagefile size limit 300kt");
+        return;
+      }
+    }
+
+    const carObject = {
+      img: imageFile.base64,
+      location: location,
+      price: price,
+      basicInfo: basicinfo,
+      carBrand: carBrand,
+      technicalDetails: {
+        vechileType: vechileType,
+        color: color,
+        fuelTypes: fuelTypes,
+        tyreType: tyreType,
+        trailerHitch: trailerHitch,
+        seatingCapacity: seatingCapacity,
+        transmission: transmission,
+        mileage: mileage,
+      },
+    };
+    try {
+      const car = await carService.create(carObject);
+      console.log(car);
+    } catch (error) {
+      // Error message
+      console.log(error.response.data.error);
+      setError(error.response.data.error);
+    }
+    console.log(carObject);
+  };
+  return (
+    &lt;>
+      &lt;div className="container">
+        &lt;div className="content-box">
+          &lt;div className="left">&lt;/div>
+          &lt;div className="right">
+            &lt;h1>Register your car for rent&lt;/h1>
+            &lt;p className="errorMessage">{error}&lt;/p>
+            &lt;form onSubmit={handleSubmit}>
+              &lt;label>Location&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="location"
+                value={location}
+                onChange={({ target }) => setLocation(target.value)}
+              />
+              &lt;label>Price&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="price"
+                value={price}
+                onChange={({ target }) => setPrice(target.value)}
+              />
+              &lt;label>Basic info&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="basicinfo"
+                value={basicinfo}
+                onChange={({ target }) => setBasicInfo(target.value)}
+              />
+              &lt;label>Car brand&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="car brand"
+                value={carBrand}
+                onChange={({ target }) => setCarBrand(target.value)}
+              />
+              &lt;label>Vehicle's type&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="vechiletype"
+                value={vechileType}
+                onChange={({ target }) => setVechileType(target.value)}
+              />
+              &lt;label>Color of the car&lt;/label>
+              &lt;input
+                className="field"
+                type="text"
+                name="color"
+                value={color}
+                onChange={({ target }) => setColor(target.value)}
+              />
+              &lt;div className="checkbox">
+                &lt;label>Trailer hitch&lt;/label>
+                &lt;input
+                  className="field"
+                  type="checkbox"
+                  name="trailer hitch"
+                  value={trailerHitch}
+                  onChange={() => setTrailerHitch(!trailerHitch)}
+                />
+              &lt;/div>
+              &lt;h3>Fuel type&lt;/h3>
+              &lt;div className="radio-group">
+                &lt;label>Diesel&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="fueltype"
+                  value="diesel"
+                  onChange={({ target }) => setFuelTypes(target.value)}
+                />
+                &lt;label>Electricity&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="fueltype"
+                  value="electric"
+                  onChange={({ target }) => setFuelTypes(target.value)}
+                />
+                &lt;label>Gasoline&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="fueltype"
+                  value="gasoline"
+                  onChange={({ target }) => setFuelTypes(target.value)}
+                />
+              &lt;/div>
+              &lt;h3>Tyre type&lt;/h3>
+              &lt;div class="radio-group">
+                &lt;label>Winter tyres&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="tyretype"
+                  value="winter"
+                  onChange={({ target }) => setTyreType(target.value)}
+                />
+                &lt;label>Summer tyres&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="tyretype"
+                  value="summer"
+                  onChange={({ target }) => setTyreType(target.value)}
+                />
+              &lt;/div>
+
+              &lt;input
+                className="field"
+                type="text"
+                name="seating capacity"
+                placeholder="Seating capacity"
+                value={seatingCapacity}
+                onChange={({ target }) => setSeatingCapacity(target.value)}
+              />
+              &lt;h3>Transmission&lt;/h3>
+              &lt;div class="radio-group">
+                &lt;label>Manual&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="transmission"
+                  value="manual"
+                  onChange={({ target }) => setTransmission(target.value)}
+                />
+                &lt;label>Automatic&lt;/label>
+                &lt;input
+                  className="field"
+                  type="radio"
+                  name="transmission"
+                  value="automatic"
+                  onChange={({ target }) => setTransmission(target.value)}
+                />
+              &lt;/div>
+
+              &lt;input
+                className="field"
+                type="text"
+                name="mileage"
+                placeholder="Miles driven"
+                value={mileage}
+                onChange={({ target }) => setMileage(target.value)}
+              />
+              &lt;div className="imageInput">
+                &lt;label>Choose image&lt;/label>
+                &lt;FileBase64
+                  multiple={false}
+                  onDone={(x) => {
+                    setImageFile(x);
+                  }}
+                />
+              &lt;/div>
+              &lt;button className="listButton" type="submit">
+                Submit
+              &lt;/button>
+            &lt;/form>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+}
+
+export default Listing;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

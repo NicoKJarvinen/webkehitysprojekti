@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import carService from "../services/cars";
 import FileBase64 from "react-file-base64";
-
+/**
+ * Komponentti autojen listaussivulle.
+ * @component
+ */
 function Listing() {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
@@ -18,7 +21,10 @@ function Listing() {
   const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
 
-  // tämä asynciksi...
+  /**
+   * Tapahtumankäsittelijä lomakkeen lähettämiselle palvelimelle.
+   * @param {object} event tapahtuma 
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
 

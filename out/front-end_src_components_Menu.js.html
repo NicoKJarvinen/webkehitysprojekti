@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> front-end/src/components/Menu.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Webproject 2020</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Components</h3><ul><li><a href="About.html">About</a></li><li><a href="Cards.html">Cards</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HeroSection.html">HeroSection</a></li><li><a href="Listing.html">Listing</a></li><li><a href="Login.html">Login</a></li><li><a href="MobileMenu.html">MobileMenu</a></li><li><a href="MyCars.html">MyCars</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Renting.html">Renting</a></li><li><a href="Renting-modalOpen.html">modalOpen</a></li><li><a href="Signup.html">Signup</a></li></ul></div><div class="category"><h2>Controllers</h2><h3>Modules</h3><ul><li><a href="module-carsRouter.html">carsRouter</a></li><li><a href="module-loginRouter.html">loginRouter</a></li><li><a href="module-userRouter.html">userRouter</a></li></ul></div><div class="category"><h2>Models</h2><h3>Modules</h3><ul><li><a href="module-carmodel.html">carmodel</a></li><li><a href="module-usermodel.html">usermodel</a></li></ul></div><div class="category"><h2>Services</h2><h3>Modules</h3><ul><li><a href="module-carService.html">carService</a></li><li><a href="module-loginService.html">loginService</a></li><li><a href="module-registerService.html">registerService</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Modules</h3><ul><li><a href="module-config.html">config</a></li><li><a href="module-logger.html">logger</a></li></ul></div><div class="category"><h2>reducers</h2><h3>Modules</h3><ul><li><a href="module-userReducer.html">userReducer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>front-end/src/components/Menu.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Fragment } from "react";
+import { slide as Menu } from "react-burger-menu";
+import { Link } from "react-router-dom";
+import { decorator as reduxBurgerMenu } from "redux-burger-menu";
+import { Button } from "./Buttons";
+
+const ReduxBurgerMenu = reduxBurgerMenu(Menu);
+
+/**
+ * Mobiili näkymässä esiin tulevan menun komponentti
+ *
+ * @component
+ */
+
+class MobileMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuOpen: false,
+    };
+  }
+
+  guestLinks = (
+    &lt;Fragment>
+      &lt;Button
+        props="/Login"
+        className="btns"
+        buttonStyle="btn--outline"
+        buttonSize="btn--large"
+        onClick={() => this.closeMenu()}
+        children="Login"
+      >&lt;/Button>
+      &lt;Button
+        props="/Signup"
+        className="btns"
+        buttonStyle="btn--outline"
+        buttonSize="btn--large"
+        onClick={() => this.closeMenu()}
+        children="Signup"
+      >&lt;/Button>
+    &lt;/Fragment>
+  );
+
+  authLinks = (
+    &lt;Fragment>
+      &lt;Button
+        className="button-mobile"
+        buttonStyle="btn--primary"
+        onClick={this.props.handleLogout}
+        children="LOGOUT"
+      >&lt;/Button>
+    &lt;/Fragment>
+  );
+
+  signedInCarLinkMobile = (
+    &lt;Fragment>
+      &lt;li className="nav-item">
+        &lt;Button
+          props="/listing"
+          className="btns"
+          buttonStyle="btn--outline"
+          buttonSize="btn--large"
+          onClick={() => this.closeMenu()}
+        >
+          List your car
+        &lt;/Button>
+      &lt;/li>
+    &lt;/Fragment>
+  );
+  /**
+   * Pitää valikon tilan tasalla siitä onko se auki vai kiinni.
+   * Eli onko painettu rastia vai menu painiketta.
+   * @param {state} state menun tila.
+   */
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen });
+  }
+  /**
+   * Asettaa valikon tilan suljetuksi, joka myös sulkee valikon.
+   *
+   */
+  closeMenu() {
+    this.setState({ menuOpen: false });
+  }
+
+  /**
+   * Asettaa valikon tilan auki, jolloin valikko aukeaa.
+   *
+   */
+  toggleMenu() {
+    this.setState((state) => ({ menuOpen: !state.menuOpen }));
+  }
+
+  render() {
+    return (
+      &lt;ReduxBurgerMenu
+        isOpen={this.state.menuOpen}
+        onStateChange={(state) => this.handleStateChange(state)}
+        right
+        width={"100%"}
+        customBurgerIcon={&lt;i className="fas fa-bars" />}
+        customCrossIcon={&lt;i className="fas fa-times" />}
+      >
+        &lt;ul className="mobile-list">
+          &lt;li className="nav-item">
+            &lt;Button
+              props="/"
+              className="btns"
+              buttonStyle="btn--outline"
+              buttonSize="btn--large"
+              onClick={() => this.closeMenu()}
+            >
+              Home
+            &lt;/Button>
+          &lt;/li>
+          &lt;li className="nav-item">
+            &lt;Button
+              props="/renting"
+              className="btns"
+              buttonStyle="btn--outline"
+              buttonSize="btn--large"
+              onClick={() => this.closeMenu()}
+            >
+              Cars
+            &lt;/Button>
+          &lt;/li>
+          {this.props.isAuth ? this.signedInCarLinkMobile : null}
+          &lt;li className="nav-item">
+            &lt;Button
+              props="/about"
+              className="btns"
+              buttonStyle="btn--outline"
+              buttonSize="btn--large"
+              onClick={() => this.closeMenu()}
+            >
+              About
+            &lt;/Button>
+          &lt;/li>
+          {this.props.isAuth ? this.authLinks : this.guestLinks}
+        &lt;/ul>
+      &lt;/ReduxBurgerMenu>
+    );
+  }
+}
+
+export default MobileMenu;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
