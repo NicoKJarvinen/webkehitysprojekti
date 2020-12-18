@@ -1,5 +1,5 @@
 import axios from "axios";
-const base = "/api/cars";
+const base = "api/cars";
 /**
  * Sisältää funktiot, joita käytetään backendin kanssa keskustelemiseen.
  * @module carService
