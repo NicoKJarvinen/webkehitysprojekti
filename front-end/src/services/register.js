@@ -12,8 +12,11 @@ const baseUrl = "api/users";
  * @returns backendin vastaus.
  */
 const register = async (credentials) => {
-    const response = await axios.post(baseUrl, credentials);
-    return response.data;
+  const response = await axios.post(
+    "https://recar-rental.herokuapp.com/" + baseUrl,
+    credentials
+  );
+  return response.data;
 };
 
-export default {register};
+export default { register };

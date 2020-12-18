@@ -19,7 +19,7 @@ const setToken = (newToken) => {
  * @returns {Array} backendin vastaus.
  */
 const getAll = () => {
-  const request = axios.get(base);
+  const request = axios.get("https://recar-rental.herokuapp.com/" + base);
   return request.then((response) => response.data);
 };
 /**
@@ -42,7 +42,9 @@ const create = async (newObject) => {
  * @returns backendin vastaus.
  */
 const getOne = async (id) => {
-  const response = await axios.get(`${base}/${id}`);
+  const response = await axios.get(
+    "https://recar-rental.herokuapp.com/" + base + `/${id}`
+  );
   return response.data;
 };
 /**
@@ -51,7 +53,9 @@ const getOne = async (id) => {
  * @returns backendin vastaus.
  */
 const deleteCar = async (id) => {
-  const response = await axios.delete(`${base}/${id}`);
+  const response = await axios.delete(
+    "https://recar-rental.herokuapp.com/" + base + `/${id}`
+  );
   return response.data;
 };
 /**
@@ -61,7 +65,10 @@ const deleteCar = async (id) => {
  * @returns backendin vastaus.
  */
 const update = async (id, price) => {
-  const response = await axios.put(`${base}/${id}`, price);
+  const response = await axios.put(
+    "https://recar-rental.herokuapp.com/" + base + `/${id}`,
+    price
+  );
   return response.data;
 };
 
