@@ -2,15 +2,29 @@ const carsRouter = require("express").Router();
 const jwt = require("jsonwebtoken");
 const Car = require("../models/car");
 const User = require("../models/user");
+/**
+ * Reititykset autoille. 
+ * @module carsRouter
+ * @category Controllers
+ */
 
+
+/**
+ * Hakee kokoelmasta kaikki autot.
+ * Palauttaa auton tiedot sekä auton lisänneen käyttäjän nimen & käyttäjänimen.
+ * @name Cars get
+ * @route {GET} /api/cars
+ */
 
 carsRouter.get("/", async (request, response) => {
   const cars = await Car.find({}).populate("user", { username: 1, name: 1 });
   response.json(cars.map((car) => car.toJSON()));
 });
-
+/** Hakee kokoelmasta yksilöidyn auton id:n perusteella.
+ * @name Car get
+ * @route {GET} /api/cars/:id
+ */
 carsRouter.get("/:id", async (request, response) => {
-  //populate?
   const car = await Car.findById(request.params.id).populate("user", { username: 1 })
   if(car) {
     response.json(car.toJSON());
@@ -18,14 +32,23 @@ carsRouter.get("/:id", async (request, response) => {
     response.status(404).end();
   }
 });
-
+/** Poistaa kokoelmasta yksilöidyn auton id:n perusteella.
+ * @name Car delete
+ * @route {DELETE} /api/cars/:id
+ */
 carsRouter.delete("/:id", async (request, response) => {
   await Car.findByIdAndRemove(request.params.id);
   response.status(204).end();
-  // populate?
 });
 
-
+/** Lisää kokoelmaan auton pyynnön mukana tulevan datan perusteella.
+ * Pyynnön mukana oltava käyttäjän identifioiva jwt token.
+ * Tallentaa myös käyttäjän kokoelmaan tiedon lisätystä autosta.
+ * Mukana validointia.
+ * Palauttaa luodun auton.
+ * @name Car post
+ * @route {POST} /api/cars
+ */
 carsRouter.post("/", async (request, response) => {
   const body = request.body;
   const decodedToken = jwt.verify(request.token, process.env.SECRET);
@@ -112,7 +135,10 @@ carsRouter.post("/", async (request, response) => {
   await user.save();
   response.status(201).json(savedCar.toJSON());
 });
-
+/**Korvaa yksilöidyn auton hinnan pyynnön mukana tulevalla datalla.
+ * @name Car put
+ * @route {PUT} /api/cars/:id
+ */
 carsRouter.put("/:id", async (request, response) => {
   const body = request.body;
   

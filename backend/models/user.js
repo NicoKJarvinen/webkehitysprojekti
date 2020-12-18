@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+/**
+ * Määrittelee käyttäjän skeeman.
+ * @module usermodel
+ * @category Models
+ */
 
+/**
+ * Käyttäjän scheema.
+ */
 const userSchema = mongoose.Schema({
     username: { type: String },
     name: { type: String },
@@ -9,7 +17,9 @@ const userSchema = mongoose.Schema({
     passwordHash: { type: String },
     cars: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Car' } ]
 })
-
+/**
+ * Käyttäjän skeeman JSON muoto.
+ */
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();

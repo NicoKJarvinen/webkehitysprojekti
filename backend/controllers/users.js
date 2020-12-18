@@ -1,7 +1,17 @@
 const bcrypt = require("bcrypt");
 const usersRouter = require("express").Router();
 const User = require("../models/user");
+/**
+ * Reititykset käyttäjien hallintaan
+ * @module userRouter
+ * @category Controllers
+ */
 
+/**Luo käyttäjän pyynnön mukana tulevasta datasta.
+ *  Käyttäjän salasana hashataan bcryptin avulla.
+ * @name user post
+ * @route {POST} /api/users
+ */
 usersRouter.post("/", async (request, response) => {
   const body = request.body;
   if (
@@ -60,6 +70,10 @@ usersRouter.post("/", async (request, response) => {
   response.json(savedUser);
 });
 
+/** Palauttaa kokoelman kaikki käyttäjät. 
+ * @name users get
+ * @route {GET} /api/users
+*/
 usersRouter.get("/", async (request, response) => {
   const users = await User.find({}).populate("cars");
   response.json(users.map((u) => u.toJSON()));

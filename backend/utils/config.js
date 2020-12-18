@@ -1,4 +1,9 @@
 require("dotenv").config();
+/**
+ * Config filu.
+ * @module config
+ * @category Utils
+ */
 
 let PORT = process.env.PORT;
 let MONGODB_URI = process.env.MONGODB_URI;

@@ -1,5 +1,13 @@
 const mongoose = require('mongoose')
+/**
+ * Määrittelee auton skeeman.
+ * @module carmodel
+ * @category Models
+ */
 
+/**
+ * Schema autolle.
+ */
 const carSchema = mongoose.Schema({
     img: { type: String },
     date: { type: String },
@@ -19,7 +27,9 @@ const carSchema = mongoose.Schema({
     },
     user: [ { type: mongoose.Schema.Types.ObjectId, ref: 'User' } ],
 })
-
+/**
+ * Scheman JSON muodon muokkaus.
+ */
 carSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()

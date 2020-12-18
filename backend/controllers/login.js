@@ -4,6 +4,18 @@ const loginRouter = require("express").Router();
 require("dotenv").config();
 const User = require("../models/user");
 
+/**
+ * Reititykset kirjautumisen hallintaan
+ * @module loginRouter
+ * @category Controllers
+ */
+
+/**Kirjaa olemassa olevan käyttäjän järjestelmään. 
+ * Etsii User kokoelmasta käyttäjän käyttäjänimen perusteella ja vertaa pyynnön mukana tullutta salasanaa ja tietokantaan tallennettua bcryptin compare funktiolla.
+ * Tämän onnistuessa käyttäjälle allekirjoitetaan yksilöivä jwt token, joka palautetaan käyttäjän muiden tietojen lisäksi.
+ * @name login post
+ * @route {POST} /api/login
+ */
 loginRouter.post("/", async (request, response) => {
   const body = request.body;
 
