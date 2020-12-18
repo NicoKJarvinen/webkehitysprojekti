@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import regService from "../services/register";
-
+/**
+ * Komponentti rekistöröitymissivulle.
+ * @component
+ */
 function Signup() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -10,7 +13,10 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordRep, setPasswordRep] = useState("");
   const [error, setError] = useState("");
-
+  /**
+   * Tapahtumankäsittelijä rekisteröinnille, lähettää lomakkeen tiedot palvelimelle.
+   * @param {object} event 
+   */
   const handleRegister = async (event) => {
     event.preventDefault();
     try {

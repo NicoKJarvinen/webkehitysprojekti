@@ -5,7 +5,17 @@ const initialState = {
     //phone: null
     logged: false
 }
+/**
+* Käyttäjän redux tilanhallinta komponentti.
+*@module userReducer
+*@category reducers
+*/
 
+/**
+ * Käyttäjän redux tila.
+ * @param {object} state alkutila. 
+ * @param {action} action tilaa muuttava action.
+ */
 const userReducer = (state = initialState, action ) => {
 switch(action.type) {
     case "LOGIN":
@@ -24,7 +34,10 @@ switch(action.type) {
         return state;
 }
 }
-
+/**
+ * Kirjautumis action.
+ * @param {object} stuff actionin mukana tuleva data. 
+ */
 export const userLogin = (stuff) => {
     return {
         type: "LOGIN",
@@ -37,6 +50,9 @@ export const userLogin = (stuff) => {
     } 
 }
 
+/**
+* Uloskirjautumis action.
+*/
 export const userLogout = () => {
     return {
         type: "LOGOUT",

@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import CardItem from "./CardItem";
 import "./Renting.css";
-
+/**
+ * Komponentti vuokraussivustolle.
+ * @component
+ */
 function Renting() {
   const [cars, setCars] = useState([]);
   const [clickedCar, setClickedCar] = useState(null);
@@ -18,6 +21,10 @@ function Renting() {
     carService.getAll().then((cars) => setCars(cars));
   }, []);
 
+  /**
+   * Käsittelee tapahtuman kun ilmoitusta klikataan, näyttää ilmoituksen kaikki tiedot.
+   * @param {string} id klikatun ilmoituksen id. 
+   */
   const showDetails = async (id) => {
     try {
       const car = await carService.getOne(id);
@@ -39,6 +46,10 @@ function Renting() {
   if (cars.length === 0) {
     return null;
   }
+  /**
+   * Komponentti jossa auton kaikki tiedot.
+   * @component
+   */
   function modalOpen() {
     if (clickedCar != null) {
       return (
