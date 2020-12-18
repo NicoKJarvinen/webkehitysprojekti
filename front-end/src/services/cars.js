@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/cars";
+const base = "/api/cars";
 /**
  * Sisältää funktiot, joita käytetään backendin kanssa keskustelemiseen.
  * @module carService
@@ -19,7 +19,7 @@ const setToken = (newToken) => {
  * @returns {Array} backendin vastaus.
  */
 const getAll = () => {
-  const request = axios.get(baseUrl);
+  const request = axios.get(base);
   return request.then((response) => response.data);
 };
 /**
@@ -33,7 +33,7 @@ const create = async (newObject) => {
     headers: { Authorization: token },
   };
 
-  const response = await axios.post(baseUrl, newObject, config);
+  const response = await axios.post(base, newObject, config);
   return response.data;
 };
 /**
@@ -41,28 +41,28 @@ const create = async (newObject) => {
  * @param {string} id haettavan auton id.
  * @returns backendin vastaus.
  */
-const getOne =  async (id) => {
- const response = await axios.get(`${baseUrl}/${id}`);
- return response.data;
+const getOne = async (id) => {
+  const response = await axios.get(`${base}/${id}`);
+  return response.data;
 };
 /**
  * Poistaa yksilöidyn auton id:n perusteella.
  * @param {string} id poistettavan auton id.
- * @returns backendin vastaus. 
+ * @returns backendin vastaus.
  */
 const deleteCar = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+  const response = await axios.delete(`${base}/${id}`);
   return response.data;
 };
 /**
- * Päivittää yksilöidyn auton hinnan id:n perusteella. 
+ * Päivittää yksilöidyn auton hinnan id:n perusteella.
  * @param {string} id päivitettävän auton id.
  * @param {string} price auton uusi hinta
- * @returns backendin vastaus. 
+ * @returns backendin vastaus.
  */
 const update = async (id, price) => {
-  const response = await axios.put(`${baseUrl}/${id}`, price);
+  const response = await axios.put(`${base}/${id}`, price);
   return response.data;
-}
+};
 
 export default { getAll, create, setToken, getOne, deleteCar, update };
