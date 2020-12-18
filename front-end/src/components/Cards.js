@@ -27,6 +27,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
             {cars.slice(1, 2).map((car) => (
@@ -34,6 +35,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
           </ul>
@@ -43,6 +45,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
             {cars.slice(3, 4).map((car) => (
@@ -50,6 +53,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
             {cars.slice(4, 5).map((car) => (
@@ -57,6 +61,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
             {cars.slice(5, 6).map((car) => (
@@ -64,6 +69,7 @@ function Cards() {
                 src={car.img}
                 text={car.basicInfo}
                 label={car.price + " €/day"}
+                props="/renting"
               />
             ))}
           </ul>
