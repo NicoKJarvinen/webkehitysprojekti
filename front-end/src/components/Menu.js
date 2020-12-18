@@ -6,6 +6,12 @@ import { Button } from "./Buttons";
 
 const ReduxBurgerMenu = reduxBurgerMenu(Menu);
 
+/**
+ * Mobiili näkymässä esiin tulevan menun komponentti
+ *
+ * @component
+ */
+
 class MobileMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -61,21 +67,26 @@ class MobileMenu extends React.Component {
       </li>
     </Fragment>
   );
-
-  // This keeps your state in sync with the opening/closing of the menu
-  // via the default means, e.g. clicking the X, pressing the ESC key etc.
+  /**
+   * Pitää valikon tilan tasalla siitä onko se auki vai kiinni.
+   * Eli onko painettu rastia vai menu painiketta.
+   * @param {state} state menun tila.
+   */
   handleStateChange(state) {
     this.setState({ menuOpen: state.isOpen });
   }
-
-  // This can be used to close the menu, e.g. when a user clicks a menu item
+  /**
+   * Asettaa valikon tilan suljetuksi, joka myös sulkee valikon.
+   *
+   */
   closeMenu() {
     this.setState({ menuOpen: false });
   }
 
-  // This can be used to toggle the menu, e.g. when using a custom icon
-  // Tip: You probably want to hide either/both default icons if using a custom icon
-  // See https://github.com/negomi/react-burger-menu#custom-icons
+  /**
+   * Asettaa valikon tilan auki, jolloin valikko aukeaa.
+   *
+   */
   toggleMenu() {
     this.setState((state) => ({ menuOpen: !state.menuOpen }));
   }

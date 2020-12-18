@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CarService from "../services/cars";
 
+/**
+ * Käyttäjän tunnusten taakse piilotettu sivu, josta löytyy
+ * käyttäjän sivulle tekemät ilmoitukset.
+ *
+ * @component
+ */
 function MyCars() {
   const username = useSelector((state) => state.user.username);
   const [cars, setCars] = useState([]);
@@ -12,7 +18,10 @@ function MyCars() {
       .then((cars) => cars.filter((car) => car.user[0].username === username))
       .then((c) => setCars(c));
   }, [username]);
-
+  /**
+   * Käsittelee painikkeen painalluksen ja lähettää päivitetyn hinnan api:in.
+   * @param {string} id auton id jonka hinta päivitetään.
+   */
   const handleSubmit = async (id) => {
     const target = id;
     const targetprice = price[target];
@@ -34,7 +43,10 @@ function MyCars() {
       console.log(e);
     }
   };
-
+  /**
+   * Käsittelee input kentän muutokset ja asettaa muuttujan tilan kun muutos tapahtuu.
+   * @param {event} event muutos.
+   */
   const handlePriceChange = async (event) => {
     const target = event.target;
     const value = target.value;
@@ -45,6 +57,10 @@ function MyCars() {
     });
   };
   console.log(price);
+  /**
+   * Käsittelee delete painikkeen tapahtuman ja post requestaa backendiin pyynnön poistamiseen.
+   * @param {string} id poistettavan auton id.
+   */
   const handleDelete = async (id) => {
     try {
       const car = await CarService.deleteCar(id);
