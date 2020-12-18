@@ -6,13 +6,18 @@ import Menu from "./Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout } from "../reducers/user";
 import carService from "../services/cars";
-
+/**
+ * Navigointibarin komponentti
+ * @component
+ */
 function Navbar() {
   const dispatch = useDispatch();
 
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-
+  /**
+   * Näyttää napin.
+   */
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -29,7 +34,10 @@ function Navbar() {
 
   const userstate = useSelector((state) => state.user);
   let isAuthenticated = userstate.logged;
-
+  /**
+   * Tapahtumankäsittelijä uloskirjautumiselle
+   * @param {object} e tapahtuma. 
+   */
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userLogout());
