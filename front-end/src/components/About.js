@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Component for About page
+ * About sivun komponentti
  *
  * @component
  */
